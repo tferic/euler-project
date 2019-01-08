@@ -12,7 +12,7 @@ https://projecteuler.net/problem=2
 fib_limit = 4e6
 
 # Initialize start numbers of fibonacci sequence
-fib = Int
+fib = UInt
 fib = [1, 2]
 
 function sum_even_fibonacci_numbers(fib, fib_limit)
