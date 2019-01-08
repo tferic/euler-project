@@ -7,16 +7,17 @@ https://projecteuler.net/problem=1
 
 use strict;
 
-sub sumMultiples {
-  my $maxval = shift @_ ;
-  my $sum = 0 ;
+sub sum_multiples {
+  my $maxval = shift @_;
+  my $sum = 0;
+
   foreach my $i (1..($maxval - 1)) {
-    if(( $i % 3 == 0) || ( $i % 5 == 0 )) {
-        $sum += $i ;
+    if ( ($i % 3 == 0) || ($i % 5 == 0) ) {
+        $sum += $i;
     }
   }
   return $sum;
 }
 
-print "Sum(10): ",sumMultiples(10),"\n" ;
-print "Sum(1000): ",sumMultiples(1000),"\n" ;
+print "Sum(10):   ",sum_multiples(10),"\n";
+print "Sum(1000): ",sum_multiples(1000),"\n";

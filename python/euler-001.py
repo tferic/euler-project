@@ -5,13 +5,12 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 https://projecteuler.net/problem=1
 '''
 
-def sumMultiples(maxval):
+def sum_multiples(maxval):
   sum = 0
   for i in range(1, maxval):
-    if(( i % 3 == 0) or (i % 5 == 0 )):
+    if ( (i % 3 == 0) or (i % 5 == 0) ):
       sum += i
   return sum
 
-print("Sum(10): ",sumMultiples(10))
-print("Sum(1000): ",sumMultiples(1000))
-
+print("Sum(10):   ",sum_multiples(10))
+print("Sum(1000): ",sum_multiples(1000))
