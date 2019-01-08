@@ -10,7 +10,7 @@ use strict;
 sub sumMultiples {
   my $maxval = shift @_ ;
   my $sum = 0 ;
-  foreach my $i (1..($maxval-1)) {
+  foreach my $i (1..($maxval - 1)) {
     if(( $i % 3 == 0) || ( $i % 5 == 0 )) {
         $sum += $i ;
     }
