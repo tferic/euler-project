@@ -12,18 +12,18 @@ https://projecteuler.net/problem=2
 fib_limit = 4000000
 
 # Initialize start numbers of fibonacci sequence
-fib = [1, 2]
+fib_init = [1, 2]
 
-def sum_even_fibonacci_numbers(fib, fib_limit):
+def sum_even_fibonacci_numbers(fib_init, fib_limit):
+    fib1, fib2 = fib_init[0], fib_init[1]
     sum = 0
 
-    while ( fib[-1] < fib_limit ):
-        if ( fib[-1] % 2 == 0 ):
-            sum += fib[-1]
-            #print("  DEBUG: Last array element: {0:10d} ; Current sum: {1:10d}".format(fib[-1], sum) )
-        fib.append(fib[-1] + fib[-2])
+    while ( fib2 < fib_limit ):
+        if ( fib2 % 2 == 0 ):
+            sum += fib2
+        # Calculate next fibonacci number, and remember only the last two values
+        fib1, fib2 = fib2, (fib1 + fib2)
     return sum
 
-# When calling the function, make sure to pass a copy of the array (fib[:]) rather than a reference to the array (fib)
-print("Sum(90):        ",sum_even_fibonacci_numbers(fib[:], 90))
-print("Sum(4'000'000): ",sum_even_fibonacci_numbers(fib[:], fib_limit))
+print("Sum(90):        ",sum_even_fibonacci_numbers(fib_init, 90))
+print("Sum(4'000'000): ",sum_even_fibonacci_numbers(fib_init, fib_limit))

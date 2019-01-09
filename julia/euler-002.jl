@@ -8,27 +8,24 @@ find the sum of the even-valued terms.
 https://projecteuler.net/problem=2
 =#
 
-using Printf
-
 # Set ceiling to 4'000'000
 fib_limit = 4e6
 
 # Initialize start numbers of fibonacci sequence
-fib = UInt
-fib = [1, 2]
+fib_init = [1, 2]
 
-function sum_even_fibonacci_numbers(fib, fib_limit)
+function sum_even_fibonacci_numbers(fib_init, fib_limit)
+    fib1, fib2 = fib_init[1], fib_init[2]
     sum = 0
-    while fib[end] < fib_limit
-        if fib[end] % 2 == 0
-            sum += fib[end]
-            #@printf "  DEBUG: Last array element: %10d ; Current sum: %10d\n" fib[end] sum
+    while fib2 < fib_limit
+        if fib2 % 2 == 0
+            sum += fib2
         end
-        push!(fib, (fib[end-1] + fib[end]) )
+        # Calculate next fibonacci number, and remember only the last two values
+        fib1, fib2 = fib2, (fib1 + fib2)
     end
     return sum
 end
 
-# When calling the function, make sure to pass a copy of the array (fib[:]) rather than a reference to the array (fib)
-println("Sum(90):        ",@time sum_even_fibonacci_numbers(fib[:], 90))
-println("Sum(4'000'000): ",@time sum_even_fibonacci_numbers(fib[:], fib_limit))
+println("Sum(90):        ",@time sum_even_fibonacci_numbers(fib_init, 90))
+println("Sum(4'000'000): ",@time sum_even_fibonacci_numbers(fib_init, fib_limit))

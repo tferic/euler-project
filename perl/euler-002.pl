@@ -14,24 +14,24 @@ use strict;
 my $fib_limit = 4000000;
 
 # Initialize start numbers of fibonacci sequence
-my @fib = (1, 2);
+my @fib_init = (1, 2);
 
 sub sum_even_fibonacci_numbers {
     my $aref = shift @_;
-    my @fib = @$aref;            # Create local copy of fibonacci init array
+    my ($fib1, $fib2) = @$aref;
     my $fib_limit = shift @_;
     my $sum = 0;
- 
-    while ( $fib[-1] < $fib_limit ) {
-        if ( $fib[-1] % 2 == 0 ) {
-            $sum += $fib[-1];
-            #printf("  DEBUG: Last array element: %10d ; Current sum: %10d\n", $fib[-1], $sum);
+     
+    while ( $fib2 < $fib_limit ) {
+        if ( $fib2 % 2 == 0 ) {
+            $sum += $fib2;
         }
-        push (@fib, $fib[-1] + $fib[-2]);
+        # Calculate next fibonacci number, and remember only the last two values
+        ($fib1, $fib2) = ($fib2, ($fib1 + $fib2));
     }
     return $sum;
 }
 
-# When calling the function, make sure to pass a reference to the array (\@fib), create copy of array inside function
-print"Sum(90):        ".sum_even_fibonacci_numbers(\@fib, 90)."\n";
-print"Sum(4'000'000): ".sum_even_fibonacci_numbers(\@fib, $fib_limit)."\n";
+# When calling the function, make sure to pass a reference to the array (\@fib_init), and copy values from array inside function
+print"Sum(90):        ".sum_even_fibonacci_numbers(\@fib_init, 90)."\n";
+print"Sum(4'000'000): ".sum_even_fibonacci_numbers(\@fib_init, $fib_limit)."\n";
