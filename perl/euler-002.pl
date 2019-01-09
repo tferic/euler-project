@@ -22,7 +22,7 @@ sub sum_even_fibonacci_numbers {
     my $fib_limit = shift @_;
     my $sum = 0;
      
-    while ( $fib2 < $fib_limit ) {
+    while ( $fib2 <= $fib_limit ) {
         if ( $fib2 % 2 == 0 ) {
             $sum += $fib2;
         }

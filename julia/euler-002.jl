@@ -17,7 +17,7 @@ fib_init = [1, 2]
 function sum_even_fibonacci_numbers(fib_init, fib_limit)
     fib1, fib2 = fib_init
     sum = 0
-    while fib2 < fib_limit
+    while fib2 <= fib_limit
         if fib2 % 2 == 0
             sum += fib2
         end
@@ -27,5 +27,5 @@ function sum_even_fibonacci_numbers(fib_init, fib_limit)
     return sum
 end
 
-println("Sum(90):        ",@time sum_even_fibonacci_numbers(fib_init, 90))
-println("Sum(4'000'000): ",@time sum_even_fibonacci_numbers(fib_init, fib_limit))
+println("Sum(90):        ", @time sum_even_fibonacci_numbers(fib_init, 90))
+println("Sum(4'000'000): ", @time sum_even_fibonacci_numbers(fib_init, fib_limit))

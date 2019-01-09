@@ -18,12 +18,12 @@ def sum_even_fibonacci_numbers(fib_init, fib_limit):
     fib1, fib2 = fib_init
     sum = 0
 
-    while ( fib2 < fib_limit ):
+    while ( fib2 <= fib_limit ):
         if ( fib2 % 2 == 0 ):
             sum += fib2
         # Calculate next fibonacci number, and remember only the last two values
         fib1, fib2 = fib2, (fib1 + fib2)
     return sum
 
-print("Sum(90):        ",sum_even_fibonacci_numbers(fib_init, 90))
-print("Sum(4'000'000): ",sum_even_fibonacci_numbers(fib_init, fib_limit))
+print("Sum(90):       ", sum_even_fibonacci_numbers(fib_init, 90))
+print("Sum(4'000'000):", sum_even_fibonacci_numbers(fib_init, fib_limit))
