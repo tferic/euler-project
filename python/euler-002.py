@@ -15,7 +15,7 @@ fib_limit = 4000000
 fib_init = [1, 2]
 
 def sum_even_fibonacci_numbers(fib_init, fib_limit):
-    fib1, fib2 = fib_init[0], fib_init[1]
+    fib1, fib2 = fib_init
     sum = 0
 
     while ( fib2 < fib_limit ):

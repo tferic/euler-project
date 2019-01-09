@@ -15,7 +15,7 @@ fib_limit = 4e6
 fib_init = [1, 2]
 
 function sum_even_fibonacci_numbers(fib_init, fib_limit)
-    fib1, fib2 = fib_init[1], fib_init[2]
+    fib1, fib2 = fib_init
     sum = 0
     while fib2 < fib_limit
         if fib2 % 2 == 0
