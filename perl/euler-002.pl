@@ -25,11 +25,13 @@ sub sum_even_fibonacci_numbers {
     while ( $fib[-1] < $fib_limit ) {
         if ( $fib[-1] % 2 == 0 ) {
             $sum += $fib[-1];
+            #printf("  DEBUG: Last array element: %10d ; Current sum: %10d\n", $fib[-1], $sum);
         }
         push (@fib, $fib[-1] + $fib[-2]);
     }
     return $sum;
 }
-  
+
+# When calling the function, make sure to pass a reference to the array (\@fib), create copy of array inside function
 print"Sum(90):        ".sum_even_fibonacci_numbers(\@fib, 90)."\n";
 print"Sum(4'000'000): ".sum_even_fibonacci_numbers(\@fib, $fib_limit)."\n";
