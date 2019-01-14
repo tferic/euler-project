@@ -42,7 +42,7 @@ def prime_factorization(num):
     if ( remaining != 1 ):
         # Every remaining number (except 1) must be a prime factor (the last one)
         results.append(primetest)
-    
+
     return results
 
 def print_results(num):
@@ -52,7 +52,7 @@ def print_results(num):
     '''
 
     print('Highest prime factor for {:15d}: {:15d}'.format( num, max(prime_factorization(num)) ) )
-    print('List of prime factors for  {:15d}: {}'.format( num, prime_factorization(num) ) )
+    print('List of prime factors for {:14d}: {}'.format( num, prime_factorization(num) ) )
 
 
 # we want to obtain prime factorization for the following numbers
