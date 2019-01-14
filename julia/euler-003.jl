@@ -7,7 +7,7 @@ https://projecteuler.net/problem=3
 
 using Printf
 
-function prime_factorization(num::Int)
+function prime_factorization(num)
     """
     This function returns all prime factors of a given number
        expects: positive integer
@@ -46,7 +46,7 @@ function prime_factorization(num::Int)
 
     if remaining != 1
         # Every remaining number (except 1) must be a prime factor (the last one)
-        push!(results, remaining)
+        push!(results, Integer(remaining))
     end
     return results
 end
@@ -56,13 +56,14 @@ function print_results(num)
     This function prints the results in a formatted way
        expects: number (integer)
     """
+    results = prime_factorization(num)
 
-    @printf("Highest prime factor for %15d: %15d\n", num, maximum(prime_factorization(num)) )
-    #@printf("List of prime factors for %15d: %15s\n", num, prime_factorization(num) )
+    @printf("Highest prime factor for %20d: %20d\n", num, maximum(results) )
+    @printf("List of prime factors for %19d: %20s\n", num, results )
 end
 
 # we want to obtain prime factorization for the following numbers
-numbers = (13195, 600851475143, 12345678901234)
+numbers = (13195, 600851475143, 12345678901234, 1234567890123456789)
 
 # Actually invoking the stuff here (main)
 map(print_results, numbers)
