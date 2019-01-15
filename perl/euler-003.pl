@@ -6,6 +6,7 @@ https://projecteuler.net/problem=3
 =cut
 
 use strict;
+use bignum;
 
 sub prime_factorization {
     # This function returns all prime factors of a given number
@@ -55,13 +56,14 @@ sub print_results {
     my $num = shift @_;
     my $aref_results = prime_factorization($num);
 
-    printf("Highest prime factor for  %15d: %15d\n", $num, $$aref_results[-1] );
-    printf("List of prime factors for %15d: %s\n", $num, join(',',@$aref_results) );
+    # printf not capable of printing BigInt. Print as string as workaround.
+    printf("Highest prime factor for  %20s: %20s\n", $num, $$aref_results[-1] );
+    printf("List of prime factors for %20s: %20s\n", $num, join(',',@$aref_results) );
 }
 
 
 # we want to obtain prime factorization for the following numbers
-my @numbers = (100000, 13195, 600851475143, 12345678901234, 1234567890123456789);
+my @numbers = (13195, 600851475143, 12345678901234, 1234567890123456789);
 
 # Actually invoking the stuff here (main)
 foreach my $n (@numbers) {
