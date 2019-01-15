@@ -5,6 +5,10 @@ What is the largest prime factor of the number 600851475143 ?
 https://projecteuler.net/problem=3
 '''
 
+# we want to obtain prime factorization for the following numbers:
+numbers = (13195, 600851475143, 12345678901234)
+#numbers = (13195, 600851475143, 12345678901234, 1234567890123456789)
+
 def prime_factorization(num):
     '''
     This function returns all prime factors of a given number
@@ -13,7 +17,7 @@ def prime_factorization(num):
     Implementation: Trial division (https://en.wikipedia.org/wiki/Trial_division)
     '''
 
-    # The number that needs to be prime factorized, is going to be reduced by division of each found prime factor
+    # The number (that needs to be prime factorized) is going to be reduced by division of each found prime factor
     remaining = num
 
     results = []
@@ -33,14 +37,14 @@ def prime_factorization(num):
         if ( remaining % primetest == 0 ):
             # Division fits - it must be a prime factor
             results.append(primetest)
-            # New number to be prime factorized is old number divided by prime factor
+            # New number (to be prime factorized) := old number divided by prime factor
             remaining /= primetest
         else:
             # Division did not fit (not a prime factor), try next number
             primetest += 2
 
     if ( remaining != 1 ):
-        # Every remaining number (except 1) must be a prime factor (the last one)
+        # Every remaining number (except 1) must be a prime factor (the last)
         results.append(primetest)
 
     return results
@@ -51,13 +55,11 @@ def print_results(num):
        expects: number (integer)
     '''
 
-    print('Highest prime factor for {:15d}: {:15d}'.format( num, max(prime_factorization(num)) ) )
-    print('List of prime factors for {:14d}: {}'.format( num, prime_factorization(num) ) )
+    results = prime_factorization(num)
+
+    print('Highest prime factor for {:15d}: {:15d}'.format( num, max(results) ) )
+    print('List of prime factors for {:14d}: {}'.format( num, results ) )
 
 
-# we want to obtain prime factorization for the following numbers
-#numbers = (13195, 600851475143, 12345678901234)
-numbers = (13195, 600851475143)
-
-# Actually invoking the stuff here (main)
+# Actually invoking the stuff here (main entry point)
 [ print_results(n) for n in numbers ]

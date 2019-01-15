@@ -8,14 +8,18 @@ https://projecteuler.net/problem=3
 use strict;
 use bignum;
 
+# we want to obtain prime factorization for the following numbers:
+my @numbers = (13195, 600851475143, 12345678901234, 1234567890123456789);
+
 sub prime_factorization {
     # This function returns all prime factors of a given number
-    #   expects: positive integer
-    #   returns: array of positive integers
+    #   expects: scalar (positive integer)
+    #   returns: reference to array of scalars (positive integers)
     # Implementation: Trial division (https://en.wikipedia.org/wiki/Trial_division)
 
     my $num = shift @_;
-    # The number that needs to be prime factorized, is going to be reduced by division of each found prime factor
+
+    # The number (that needs to be prime factorized) is going to be reduced by division of each found prime factor
     my $remaining = $num;
     my @results;
 
@@ -35,7 +39,7 @@ sub prime_factorization {
         if ( $remaining % $primetest == 0 ) {
             # Division fits - it must be a prime factor
             push @results, $primetest;
-            # New number to be prime factorized is old number divided by prime factor
+            # New number (to be prime factorized) := old number divided by prime factor
             $remaining /= $primetest;
         }
         else {
@@ -44,7 +48,7 @@ sub prime_factorization {
         }
     }
     if ( $remaining != 1 ) {
-        # Every remaining number (except 1) must be a prime factor (the last one)
+        # Every remaining number (except 1) must be a prime factor (the last)
         push @results, $remaining;
     }
     return \@results;
@@ -62,10 +66,7 @@ sub print_results {
 }
 
 
-# we want to obtain prime factorization for the following numbers
-my @numbers = (13195, 600851475143, 12345678901234, 1234567890123456789);
-
-# Actually invoking the stuff here (main)
+# Actually invoking everything here (main entry point)
 foreach my $n (@numbers) {
     print_results($n);
 }

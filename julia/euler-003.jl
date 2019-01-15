@@ -7,6 +7,9 @@ https://projecteuler.net/problem=3
 
 using Printf
 
+# we want to obtain prime factorization for the following numbers:
+numbers = (13195, 600851475143, 12345678901234, 1234567890123456789)
+
 function prime_factorization(num)
     """
     This function returns all prime factors of a given number
@@ -15,7 +18,7 @@ function prime_factorization(num)
     Implementation: Trial division (https://en.wikipedia.org/wiki/Trial_division)
     """
 
-    # The number that needs to be prime factorized, is going to be reduced by division of each found prime factor
+    # The number (that needs to be prime factorized) is going to be reduced by division of each found prime factor
     remaining = num
 
     results = []
@@ -36,7 +39,7 @@ function prime_factorization(num)
         if remaining % primetest == 0
             # Division fits - it must be a prime factor
             push!(results, primetest)
-            # New number to be prime factorized is old number divided by prime factor
+            # New number (to be prime factorized) := old number divided by prime factor
             remaining /= BigInt(primetest)
         else
             # Division did not fit (not a prime factor), try next number
@@ -61,9 +64,6 @@ function print_results(num)
     @printf("Highest prime factor for %20d: %20d\n", num, maximum(results) )
     @printf("List of prime factors for %19d: %20s\n", num, results )
 end
-
-# we want to obtain prime factorization for the following numbers
-numbers = (13195, 600851475143, 12345678901234, 1234567890123456789)
 
 # Actually invoking the stuff here (main)
 map(print_results, numbers)
