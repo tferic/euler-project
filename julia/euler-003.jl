@@ -37,7 +37,7 @@ function prime_factorization(num)
             # Division fits - it must be a prime factor
             push!(results, primetest)
             # New number to be prime factorized is old number divided by prime factor
-            remaining /= primetest
+            remaining /= BigInt(primetest)
         else
             # Division did not fit (not a prime factor), try next number
             primetest += 2
