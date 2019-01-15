@@ -49,7 +49,7 @@ function prime_factorization(num)
 
     if remaining != 1
         # Every remaining number (except 1) must be a prime factor (the last one)
-        push!(results, Integer(remaining))
+        push!(results, BigInt(remaining))
     end
     return results
 end
