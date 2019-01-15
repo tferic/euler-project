@@ -23,7 +23,7 @@ function prime_factorization(num)
     # Exception case for prime factor 2 (after this, we can skip all even numbers)
     while remaining % 2 == 0
         push!(results, 2)
-        remaining /= 2
+        remaining /= BigInt(2)
     end
 
     # primetest is the number, by which we are testing division (potential prime factor)
