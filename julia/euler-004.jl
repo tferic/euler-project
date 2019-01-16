@@ -7,7 +7,7 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 # Find results for each of the following number of digits:
 digits = (2, 3, 6, 7)
 
-function is_palindrome(input)
+function is_palindromic(input)
     """
     This function returns "true" if input (number or string) is a palindrome, and "false" if it is not
         expects: number or string (potential palindrome)
@@ -17,7 +17,7 @@ function is_palindrome(input)
     return string(input) == reverse(string(input))
 end
 
-function is_palindrome_handmade(input)
+function is_palindromic_handmade(input)
     """
     Re-invent the wheel, rather than simply using "reverse()"
     This function returns "true" if input (number or string) is a palindrome, and "false" if it is not
@@ -71,7 +71,7 @@ function find_biggest_palindrome(dig)
     # nested iteration counting backwards. Is the product a palindrome?
     for f1 = max:-1:min, f2 = max:-1:min
         prod = f1 * f2
-        if is_palindrome(prod)
+        if is_palindromic(prod)
             if prod > palindrome_max
                 palindrome_max = prod
                 f1_max, f2_max = f1, f2
