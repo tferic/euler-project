@@ -5,7 +5,7 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 '''
 
 # Find results for each of the following number of digits:
-digits = (2, 3, 6, 7)
+digits = (2, 3, 6 ,7)
 
 def is_palindromic(input):
     '''
@@ -24,15 +24,15 @@ def is_palindromic_handmade(input):
         returns: Boolean
     '''
     # convert input to array of single characters
-    str = list(str(input))
+    strarr = str(input)
     # determine the middle position of the string
-    middle = str // 2
+    middle = len(strarr) // 2
 
     # compare the leftmost to the rightmost character of the input
     # then the (leftmost + 1) to the (rightmost - 1 character), and so on, until the middle of the string is reached
     for left in range(0, (middle - 1) ):
         right = left + 1
-        if( str[left] != str[-right] ):
+        if( strarr[left] != strarr[-right] ):
             return False
     return True
 
