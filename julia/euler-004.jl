@@ -68,7 +68,7 @@ function find_biggest_palindrome(dig)
     f1_max = false
     f2_max = false
 
-    # nested interation counting backwards. Is the product a palindrome?
+    # nested iteration counting backwards. Is the product a palindrome?
     for f1 = max:-1:min, f2 = max:-1:min
         prod = f1 * f2
         if is_palindrome(prod)
@@ -77,7 +77,7 @@ function find_biggest_palindrome(dig)
                 f1_max, f2_max = f1, f2
             end
         else
-            # Stop looping when there is a palidrome number and both factors are smaller than the ones found
+            # Stop looping when there is a palindrome number and both factors are smaller than the ones found
             if palindrome_max != false
                 if (f1 < f1_max && f2 < f2_max) || (f1 < f2_max && f2 < f1_max)
                     return [palindrome_max, f1_max, f2_max]
