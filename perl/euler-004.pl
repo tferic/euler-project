@@ -69,6 +69,8 @@ sub find_biggest_palindrome {
     
     my ($min, $max) = get_range_by_digits($dig);
 
+    my ($pal_max, $f1_max, $f2_max) = (undef, undef, undef);
+
     # nested iteration counting backwards. Is the product a palindrome?
     for my $f1 (reverse $min .. $max) {
         for my $f2 (reverse $min .. $max) {
@@ -76,12 +78,23 @@ sub find_biggest_palindrome {
             my $pal_test = $f1 * $f2;
 
             if( is_palindromic($pal_test) ) {
-                # The first palindromic number we find, will be the biggest one
-                return ($pal_test, $f1, $f2);
+                if( $pal_test > $pal_max ) {
+                    $pal_max = $pal_test;
+                    $f1_max = $f1;
+                    $f2_max = $f2;
+                }
+            }
+            else {
+                # stop looping if a palidrome number was previously found and if f1, f2 are smaller than the previous factors
+                if( $pal_max != undef ) {
+                    if( ($f1 < $f1_max && $f2 < $f2_max ) || ($f2 < $f1_max && $f1 < $f2_max) ) {
+                        return ($pal_max, $f1_max, $f2_max);
+                    } 
+                }
             }
         }
     }
-    return (undef, undef, undef);
+    return ($pal_max, $f1_max, $f2_max);
 }
 
 for my $d (@digits) {

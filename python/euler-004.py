@@ -58,6 +58,8 @@ def find_biggest_palindrome(dig):
     '''
     min, max = get_range_by_digits(dig)
 
+    pal_max, f1_max, f2_max = (False, False, False)
+
     # nested iteration counting backwards. Is the product a palindrome?
     for f1 in range(max, min, -1):
         for f2 in range(max, min, -1):
@@ -65,10 +67,17 @@ def find_biggest_palindrome(dig):
             pal_test = f1 * f2
 
             if is_palindromic(pal_test):
-                # The first palindromic number we find, will be the biggest one
-                return (pal_test, f1, f2)
+                if pal_test > pal_max:
+                    pal_max = pal_test
+                    f1_max = f1
+                    f2_max = f2
+            else:
+                # stop looping if a palidrome number was previously found and if f1, f2 are smaller than the previous factors
+                if pal_max != False:
+                    if (f1 < f1_max and f2 < f2_max) or (f2 < f1_max and f1 < f2_max):
+                        return (pal_max, f1_max, f2_max)
 
-    return (false, false, false)
+    return (pal_max, f1_max, f2_max)
 
 for d in digits:
     palindrome_max, f1, f2 = find_biggest_palindrome(d)

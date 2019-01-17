@@ -58,9 +58,6 @@ function get_range_by_digits(dig)
     # e.g. 3-digits: 999
     max = (1 * 10 ^ dig) - 1
 
-    #min_max = Dict("min" => min, "max" => max)
-
-    #return min_max
     return (min, max)
 end
 
@@ -72,9 +69,9 @@ function find_biggest_palindrome(dig)
     """
     min, max = get_range_by_digits(dig)
 
-    println("Running palindrome search over digits: ", dig)
+    pal_max, f1_max, f2_max = (false, false, false)
 
-    # nested iteration counting backwards. Is the pal_testuct a palindrome?
+    # nested iteration counting backwards. Is pal_test a palindrome?
     for f1 = max:-1:min
         for f2 = max:-1:min
             
@@ -82,12 +79,22 @@ function find_biggest_palindrome(dig)
             #println("Palindrom Loop: digits: ", dig, " ; min: ", min, " ; max: ", max, " ; f1: ", f1, " ; f2: ", f2, " ; product: ", pal_test)
             
             if is_palindromic(pal_test)
-                # The first palindromic number we find, will be the biggest one
-                return (pal_test, f1, f2)
+                if pal_test > pal_max
+                    pal_max = pal_test
+                    f1_max = f1
+                    f2_max = f2
+                end
+            else
+                # stop looping if a palidrome number was previously found and if f1, f2 are smaller than the previous factors
+                if pal_max != false
+                    if (f1 < f1_max && f2 < f2_max) || (f2 < f1_max && f1 < f2_max)
+                        return (pal_max, f1_max, f2_max)
+                    end
+                end
             end
         end
     end
-    return (false, false, false)
+    return (pal_max, f1_max, f2_max)
 end
 
 for d in digits
