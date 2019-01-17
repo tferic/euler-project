@@ -5,7 +5,7 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 '''
 
 # Find results for each of the following number of digits:
-digits = (2, 3, 6 ,7)
+digits = (2, 3, 6, 7)
 
 def is_palindromic(input):
     '''
