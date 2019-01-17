@@ -31,9 +31,11 @@ def is_palindromic_handmade(input):
     # compare the leftmost to the rightmost character of the input
     # then the (leftmost + 1) to the (rightmost - 1 character), and so on, until the middle of the string is reached
     for left in range(0, (middle - 1) ):
+
         right = left + 1
         if( strarr[left] != strarr[-right] ):
             return False
+            
     return True
 
 def get_range_by_digits(dig):
@@ -59,6 +61,7 @@ def find_biggest_palindrome(dig):
     f = get_range_by_digits(dig)
     min = f["min"]
     max = f["max"]
+
     palindrome_max = False
     f1_max = False
     f2_max = False
@@ -66,16 +69,22 @@ def find_biggest_palindrome(dig):
     # nested iteration counting backwards. Is the product a palindrome?
     for f1 in range(max, min, -1):
         for f2 in range(max, min, -1):
+
             prod = f1 * f2
+
             if( is_palindromic(prod) ):
+
                 if( prod > palindrome_max ):
                    palindrome_max = prod
                    f1_max, f2_max = f1, f2
+
             else:
+
                # Stop looping when there is a palindrome number and both factors are smaller than the ones found
                if( palindrome_max != False ):
                   if( (f1 < f1_max and f2 < f2_max) or (f1 < f2_max and f2 < f1_max) ):
                     return [palindrome_max, f1_max, f2_max]
+
     return [palindrome_max, f1_max, f2_max]
 
 for d in digits:
