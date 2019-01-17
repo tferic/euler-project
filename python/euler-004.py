@@ -30,10 +30,9 @@ def is_palindromic_handmade(input):
 
     # compare the leftmost to the rightmost character of the input
     # then the (leftmost + 1) to the (rightmost - 1 character), and so on, until the middle of the string is reached
-    for left in range(0, (middle - 1) ):
-
+    for left in range(0, (middle - 1)):
         right = left + 1
-        if( strarr[left] != strarr[-right] ):
+        if strarr[left] != strarr[-right]:
             return False
             
     return True
@@ -49,8 +48,7 @@ def get_range_by_digits(dig):
     # e.g. 3-digits: 999
     max = (1 * 10 ** dig) - 1
 
-    min_max = { "min": min, "max": max }
-    return min_max
+    return (min, max)
 
 def find_biggest_palindrome(dig):
     '''
@@ -58,35 +56,20 @@ def find_biggest_palindrome(dig):
         expects: number (how many digits should the numbers for the two products have?)
         returns: array (element1: palindome number; element2: factor1 element3: factor2)
     '''
-    f = get_range_by_digits(dig)
-    min = f["min"]
-    max = f["max"]
-
-    palindrome_max = False
-    f1_max = False
-    f2_max = False
+    min, max = get_range_by_digits(dig)
 
     # nested iteration counting backwards. Is the product a palindrome?
     for f1 in range(max, min, -1):
         for f2 in range(max, min, -1):
 
-            prod = f1 * f2
+            pal_test = f1 * f2
 
-            if( is_palindromic(prod) ):
+            if is_palindromic(pal_test):
+                # The first palindromic number we find, will be the biggest one
+                return (pal_test, f1, f2)
 
-                if( prod > palindrome_max ):
-                   palindrome_max = prod
-                   f1_max, f2_max = f1, f2
-
-            else:
-
-               # Stop looping when there is a palindrome number and both factors are smaller than the ones found
-               if( palindrome_max != False ):
-                  if( (f1 < f1_max and f2 < f2_max) or (f1 < f2_max and f2 < f1_max) ):
-                    return [palindrome_max, f1_max, f2_max]
-
-    return [palindrome_max, f1_max, f2_max]
+    return (false, false, false)
 
 for d in digits:
-    results = find_biggest_palindrome(d)
-    print("Biggest palindrome for", d, "digits:", results[0], "; factors:", results[1], ",", results[2] )
+    palindrome_max, f1, f2 = find_biggest_palindrome(d)
+    print("Biggest palindrome for", d, "digits:", palindrome_max, "; factors:", f1, ",", f2)

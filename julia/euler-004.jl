@@ -1,8 +1,11 @@
 """
-Problem 4: Largest palindrome product
-A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
-Find the largest palindrome made from the product of two 3-digit numbers.
+Problem 4: Largest palindrome pal_testuct
+A palindromic number reads the same both ways. The largest palindrome made from the pal_testuct of two 2-digit numbers is 9009 = 91 × 99.
+Find the largest palindrome made from the pal_testuct of two 3-digit numbers.
 """
+
+#using Distributed
+#addprocs(3)
 
 # Find results for each of the following number of digits:
 digits = (2, 3, 6, 7)
@@ -65,41 +68,29 @@ function find_biggest_palindrome(dig)
     """
     This function finds the biggest palindome number of two products
         expects: number (how many digits should the numbers for the two products have?)
-        returns: array (element1: palindome number; element2: factor1 element3: factor2)
+        returns: list (element1: palindome number; element2: factor1 element3: factor2)
     """
     min, max = get_range_by_digits(dig)
 
-    palindrome_max = false
-    f1_max = false
-    f2_max = false
+    println("Running palindrome search over digits: ", dig)
 
-    # nested iteration counting backwards. Is the product a palindrome?
-    for f1 = max:-1:min, f2 = max:-1:min
-
-        prod = f1 * f2
+    # nested iteration counting backwards. Is the pal_testuct a palindrome?
+    for f1 = max:-1:min
+        for f2 = max:-1:min
             
-        if is_palindromic(prod)
-
-            if prod > palindrome_max
-                palindrome_max = prod
-                f1_max, f2_max = f1, f2
-            end
-
-        else
-
-            # Stop looping when there is a palindrome number and both factors are smaller than the ones found
-            if palindrome_max != false
-                if (f1 < f1_max && f2 < f2_max) || (f1 < f2_max && f2 < f1_max)
-                    return [palindrome_max, f1_max, f2_max]
-                end
-            end
+            pal_test = f1 * f2
+            #println("Palindrom Loop: digits: ", dig, " ; min: ", min, " ; max: ", max, " ; f1: ", f1, " ; f2: ", f2, " ; product: ", pal_test)
             
+            if is_palindromic(pal_test)
+                # The first palindromic number we find, will be the biggest one
+                return (pal_test, f1, f2)
+            end
         end
     end
-    return [palindrome_max, f1_max, f2_max]
+    return (false, false, false)
 end
 
 for d in digits
-    @time results = find_biggest_palindrome(d)
-    println("Biggest palindrome for ", d, " digits: ", results[1], " ; factors: ", results[2], ", ", results[3] )
+    @time palindrome_max, f1, f2 = find_biggest_palindrome(d)
+    println("Biggest palindrome for ", d, " digits: ", palindrome_max, " ; factors: ", f1, ", ", f2)
 end

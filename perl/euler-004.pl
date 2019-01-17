@@ -42,7 +42,6 @@ sub is_palindromic_handmade {
             return (1==0); #false
         }
     }
-
     return (1==1); #true
 }
 
@@ -70,43 +69,24 @@ sub find_biggest_palindrome {
     
     my ($min, $max) = get_range_by_digits($dig);
 
-    my $palindrome_max = undef;
-    my $f1_max = undef;
-    my $f2_max = undef;
-
     # nested iteration counting backwards. Is the product a palindrome?
     for my $f1 (reverse $min .. $max) {
         for my $f2 (reverse $min .. $max) {
 
-            my $prod = $f1 * $f2;
+            my $pal_test = $f1 * $f2;
 
-            if( is_palindromic($prod) ) {
-
-               if( $prod > $palindrome_max ) {
-                   $palindrome_max = $prod;
-                   ($f1_max, $f2_max) = ($f1, $f2);
-               }
-
-            }
-            else {
-
-               # Stop looping when there is a palindrome number and both factors are smaller than the ones found
-               if( $palindrome_max != undef ) {
-                   if( ($f1 < $f1_max and $f2 < $f2_max) or ($f1 < $f2_max and $f2 < $f1_max) ) {
-                       return ($palindrome_max, $f1_max, $f2_max);
-                   }
-               }
-
+            if( is_palindromic($pal_test) ) {
+                # The first palindromic number we find, will be the biggest one
+                return ($pal_test, $f1, $f2);
             }
         }
     }
-
-    return ($palindrome_max, $f1_max, $f2_max);
+    return (undef, undef, undef);
 }
 
 for my $d (@digits) {
 
-    my @results = find_biggest_palindrome($d);
+    my ($pal, $f1, $f2) = find_biggest_palindrome($d);
 
-    print("Biggest palindrome for ", $d, " digits: ", $results[0], " ; factors: ", $results[1], ", ", $results[2], "\n" );
+    print("Biggest palindrome for ", $d, " digits: ", $pal, " ; factors: ", $f1, ", ", $f2, "\n" );
 }
