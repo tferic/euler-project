@@ -13,6 +13,7 @@ function is_palindromic(input)
         expects: number or string (potential palindrome)
         returns: Boolean
     """
+
     # if the input is the same as the reversed input, it is a palindrome (return true)
     return string(input) == reverse(string(input))
 end
@@ -32,10 +33,13 @@ function is_palindromic_handmade(input)
     # compare the leftmost to the rightmost character of the input
     # then the (leftmost + 1) to the (rightmost - 1 character), and so on, until the middle of the string is reached
     for left in 1:middle
+
         right = left - 1
+
         if str[left] != str[end-right]
             return false
         end
+
     end
     return true
 end
@@ -44,15 +48,17 @@ function get_range_by_digits(dig)
     """
     This function returns the minimum and maximum number for a given number of digits
         expects: number (number of digits)
-        return: Dictionary with minimum value in "min", maximum value in "max"
+        return: List with two elements ("min", "max")
     """
     # e.g. 3-digits: 100
     min = 1 * 10 ^ (dig - 1)
     # e.g. 3-digits: 999
     max = (1 * 10 ^ dig) - 1
 
-    min_max = Dict("min" => min, "max" => max)
-    return min_max
+    #min_max = Dict("min" => min, "max" => max)
+
+    #return min_max
+    return (min, max)
 end
 
 function find_biggest_palindrome(dig)
@@ -61,28 +67,33 @@ function find_biggest_palindrome(dig)
         expects: number (how many digits should the numbers for the two products have?)
         returns: array (element1: palindome number; element2: factor1 element3: factor2)
     """
-    f = get_range_by_digits(dig)
-    min = f["min"]
-    max = f["max"]
+    min, max = get_range_by_digits(dig)
+
     palindrome_max = false
     f1_max = false
     f2_max = false
 
     # nested iteration counting backwards. Is the product a palindrome?
     for f1 = max:-1:min, f2 = max:-1:min
+
         prod = f1 * f2
+            
         if is_palindromic(prod)
+
             if prod > palindrome_max
                 palindrome_max = prod
                 f1_max, f2_max = f1, f2
             end
+
         else
+
             # Stop looping when there is a palindrome number and both factors are smaller than the ones found
             if palindrome_max != false
                 if (f1 < f1_max && f2 < f2_max) || (f1 < f2_max && f2 < f1_max)
                     return [palindrome_max, f1_max, f2_max]
                 end
             end
+            
         end
     end
     return [palindrome_max, f1_max, f2_max]
