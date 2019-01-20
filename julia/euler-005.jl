@@ -5,51 +5,82 @@ What is the smallest positive number that is evenly divisible by all of the numb
 =#
 
 # List of upper limits (for any divisor ranges) to run calculations on
-divisors_max = (10, 20)
+maxnum_range = (10, 20, 30, 50, 100, 200, 400, 1000, 10000)
 
-function get_divisor_list(maxnum)
+function get_basenumbers_list(maxnum::BigInt)
     """
-    This function creates an optimized list of numbers, that should be used as divisors.
-        expects: number (upper limit of divisor list)
-        returns: list of numbers (divisors)
+    This function creates an optimized list of numbers, that should be used to calculate the smallest common multiple on
+        expects: number (upper limit of numners list)
+        returns: list of numbers (numbers)
     """
-    half = fld(maxnum, 2)
+    # We don't need to process 1:maxnum, but (maxnum/2):maxnum
+    # e.g. if a number is divisible by "16", then it is also divisible by "2","4","8"
+    half::BigInt = fld(maxnum, 2)
     return collect(half:maxnum)
 end
 
-function is_multiple(num_test, divisors)
+function least_common_multiple(n1::BigInt, n2::BigInt)
     """
-    This function checks, if a given number is a smallest multiple from a list of divisors
-        expects: number (potential smallest multiple), list of numbers (divisors)
-        returs: true or false
+    This function returns the least common multiple from two given numbers
+        expects: number1, number2
+        returns: number (least common multiple of the two numbers)
+    Implementation: Algorithm "Reduction by the greatest common divisor" https://en.wikipedia.org/wiki/Least_common_multiple
     """
-    for d in divisors
-        if num_test % d != 0
-            return false
+    result = BigInt
+    result = div( (n1 * n2), ( greatest_common_divisor(n1, n2) ) )
+    return BigInt(result)
+end
+
+function greatest_common_divisor(n1::BigInt, n2::BigInt)
+    """
+    This function returns the greatest common divisor from two given numbers
+        expects: number1, number2
+        returns: number (greatest common divisor of the two numbers)
+    Implementation: "Binary Method" algorith https://en.wikipedia.org/wiki/Greatest_common_divisor
+    """
+    exp = BigInt
+    exp = 0
+    
+    if n1 == 0
+        return n2
+    end
+
+    while iseven(n1) && iseven(n2)
+        n1 = div(n1, 2)
+        n2 = div(n2, 2)
+        exp += 1
+    end
+    
+    while n1 != n2
+        if iseven(n1)
+            n1 = div(n1, 2)
+        elseif iseven(n2)
+            n2 = div(n2, 2)
+        elseif n1 > n2
+            n1 = div((n1 - n2), 2)
+        else
+            n2 = div((n2 - n1), 2)
         end
     end
 
-    return true
+    return n1 * 2 ^ exp
 end
 
-function find_smallest_multiple(maxnum)
+function find_smallest_common_multiple(maxnum::BigInt)
     """
-    This function counts up potential smallest multiples of divisors 2-maxnum
-        expects: number (upper limit of divisor list 1-maxnum)
-        returns: number (smallest multiple)
+    This function the smallest common multiple on a list of numnbers from 2-maxnum
+        expects: number (upper limit of number list: 2-maxnum)
+        returns: number (smallest common multiple)
     """
-
-    divisors = get_divisor_list(maxnum)
-
-    num_test = maxnum
-    while ! is_multiple(num_test, divisors)
-        num_test += 1
-    end
-    return num_test
+    result = BigInt
+    result = reduce(least_common_multiple, get_basenumbers_list(maxnum))
+    return result
 end
 
 # Invoking stuff here (main entry point)
-for dmax = divisors_max
-    num = find_smallest_multiple(dmax)
-    println("The smallest multiple for all numbers from 1-", dmax, ": ", num)
+for n::BigInt = maxnum_range
+    result = BigInt
+
+    @time result = find_smallest_common_multiple(n)
+    println("The smallest multiple for all numbers from 1-", n, ": ", result)
 end
