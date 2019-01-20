@@ -73,7 +73,10 @@ function find_smallest_common_multiple(maxnum::BigInt)
         returns: number (smallest common multiple)
     """
     result = BigInt
+    # Reduce invokes function recursively on a list of numbers
+    # e.g. f(n1,n2) ← [a,b,c,d] : f(f(f(a,b),c),d)
     result = reduce(least_common_multiple, get_basenumbers_list(maxnum))
+    
     return result
 end
 
