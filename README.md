@@ -6,7 +6,7 @@ Trying to follow the principles:
 <ul type="disc">
     <li>Avoid using modules/libraries.</li>
     <li>Don't use other's people code.</li>
-    <li>Write code, that's easy to read.</li>
+    <li>Try to write code, that is easy to read and understand.</li>
     <li>Add comment lines, in order to clarify code context and algorithms.</li>
 </ul>
 </br>
