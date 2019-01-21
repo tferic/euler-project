@@ -5,7 +5,7 @@ What is the smallest positive number that is evenly divisible by all of the numb
 https://projecteuler.net/problem=5
 '''
 
-# List of upper limits (for any divisor ranges) to run calculations on
+# List of upper limits (for number ranges) to find smallest multiple on
 maxnum_range = (10, 20, 30, 50, 100, 200, 400, 1000, 10000, 100000)
 
 def least_common_multiple(n1, n2):
