@@ -2,7 +2,7 @@
 Playground to learn better coding. </br>
 Implement problem solutions in different languages (such as Julia, Python, Perl) </br>
 
-Trying to follow the principles:</br)
+Trying to follow the principles:
 <ul type="square">
     <li>Avoid using modules/libraries.</li>
     <li>Avoid using other's people code</li>
