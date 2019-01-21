@@ -1,8 +1,8 @@
 # euler-project
-Playground to learn better coding. </br>
-Implement problem solutions in different languages (such as Julia, Python, Perl) </br>
+Playground to learn better coding.</br>
+Implement problem solutions in different languages (such as Julia, Python, Perl)</br>
 
-Trying to follow the principles:
+Trying to follow these principles:
 <ul type="disc">
     <li>Avoid using modules/libraries.</li>
     <li>Don't use other's people code.</li>
