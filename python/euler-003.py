@@ -51,7 +51,7 @@ def prime_factorization(num):
 
 def print_results(num):
     '''
-    This function prints the results in a formatted way
+    This function calculates and prints the results in a formatted way
        expects: number (integer)
     '''
 

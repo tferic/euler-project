@@ -56,7 +56,7 @@ sub prime_factorization {
 }
 
 sub print_results {
-    # This function prints the results in a formatted way
+    # This function calculates and prints the results in a formatted way
     #   expects: number (integer)
     my $num = shift @_;
     my $aref_results = prime_factorization($num);

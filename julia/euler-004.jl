@@ -1,33 +1,31 @@
-"""
+#=
 Problem 4: Largest palindrome pal_testuct
 A palindromic number reads the same both ways. The largest palindrome made from the pal_testuct of two 2-digit numbers is 9009 = 91 × 99.
 Find the largest palindrome made from the pal_testuct of two 3-digit numbers.
-"""
-
-#using Distributed
-#addprocs(3)
+https://projecteuler.net/problem=4
+=#
 
 # Find results for each of the following number of digits:
 digits = (2, 3, 6, 7)
 
 function is_palindromic(input)
-    """
+    #=
     This function returns "true" if input (number or string) is a palindrome, and "false" if it is not
         expects: number or string (potential palindrome)
         returns: Boolean
-    """
+    =#
 
     # if the input is the same as the reversed input, it is a palindrome (return true)
     return string(input) == reverse(string(input))
 end
 
 function is_palindromic_handmade(input)
-    """
+    #=
     Re-invent the wheel, rather than simply using "reverse()"
     This function returns "true" if input (number or string) is a palindrome, and "false" if it is not
         expects: number or string (potential palindrome)
         returns: Boolean
-    """
+    =#
     # convert input to array of single characters
     str = collect(string(input))
     # determine the middle position of the string
@@ -48,11 +46,11 @@ function is_palindromic_handmade(input)
 end
 
 function get_range_by_digits(dig)
-    """
+    #=
     This function returns the minimum and maximum number for a given number of digits
         expects: number (number of digits)
         return: List with two elements ("min", "max")
-    """
+    =#
     # e.g. 3-digits: 100
     min = 1 * 10 ^ (dig - 1)
     # e.g. 3-digits: 999
@@ -62,11 +60,11 @@ function get_range_by_digits(dig)
 end
 
 function find_biggest_palindrome(dig)
-    """
+    #=
     This function finds the biggest palindome number of two products
         expects: number (how many digits should the numbers for the two products have?)
         returns: list (element1: palindome number; element2: factor1 element3: factor2)
-    """
+    =#
     min, max = get_range_by_digits(dig)
 
     pal_max, f1_max, f2_max = (false, false, false)

@@ -1,9 +1,9 @@
-"""
+#=
 Problem 3: Largest prime factor
 The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
 https://projecteuler.net/problem=3
-"""
+=#
 
 using Printf
 
@@ -11,12 +11,12 @@ using Printf
 numbers = (13195, 600851475143, 12345678901234, 1234567890123456789)
 
 function prime_factorization(num)
-    """
+    #=
     This function returns all prime factors of a given number
        expects: positive integer
        returns: array of positive integers
     Implementation: Trial division (https://en.wikipedia.org/wiki/Trial_division)
-    """
+    =#
 
     # The number (that needs to be prime factorized) is going to be reduced by division of each found prime factor
     remaining = num
@@ -55,10 +55,10 @@ function prime_factorization(num)
 end
 
 function print_results(num)
-    """
-    This function prints the results in a formatted way
+    #=
+    This function calculates and prints the results in a formatted way
        expects: number (integer)
-    """
+    =#
     results = prime_factorization(num)
 
     @printf("Highest prime factor for %20d: %20d\n", num, maximum(results) )
