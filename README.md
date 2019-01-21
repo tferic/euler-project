@@ -7,7 +7,7 @@ Trying to follow these principles:
     <li>Avoid using modules/libraries.</li>
     <li>Don't use other's people code.</li>
     <li>Try to write code, that is easy to read and understand.</li>
-    <li>Add comment lines, in order to clarify code context and algorithms.</li>
+    <li>Add comment lines, in order to further clarify code context and algorithms.</li>
 </ul>
 </br>
 Project-Euler problems are described here:
