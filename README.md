@@ -9,6 +9,6 @@ Trying to follow the principles:
     <li>Write code, that is easy to read</li>
     <li>Add comment lines to clarify the context</li>
 </ul>
-
-Problems are described here:
+</br>
+Project-Euler problems are described here:
 https://projecteuler.net/archives
