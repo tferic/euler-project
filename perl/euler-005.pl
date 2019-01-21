@@ -2,14 +2,15 @@
 Problem 5: Smallest multiple
 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+https://projecteuler.net/problem=5
 =cut
 
 use strict;
 use warnings;
-#use bignum;
+use bigint;
 
 # List of upper limits (for any divisor ranges) to run calculations on
-my @maxnum_range = (10, 20, 30, 50, 100, 200, 400);
+my @maxnum_range = (10, 20, 30, 50, 100, 200, 400, 1000, 10000, 100000);
 
 sub least_common_multiple {
     # This function returns the least common multiple from two given numbers
@@ -17,7 +18,7 @@ sub least_common_multiple {
     #     returns: number (least common multiple of the two numbers)
     # Implementation: Algorithm "Reduction by the greatest common divisor" https://en.wikipedia.org/wiki/Least_common_multiple
     my ($n1, $n2) = (@_);
-    
+
     my $result = int( ($n1 * $n2) / (greatest_common_divisor($n1, $n2)) );
     return $result;
 }
@@ -27,8 +28,6 @@ sub greatest_common_divisor {
     #     expects: number1, number2
     #     returns: number (greatest common divisor of the two numbers)
     my ($n1, $n2) = (@_);
-
-    #print "DEBUG: gcd: n1: $n1 ; n2: $n2\n";
 
     if( $n2 == 0 ) {
         return $n1;
