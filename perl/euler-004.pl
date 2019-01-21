@@ -5,6 +5,7 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 =cut
 
 use strict;
+use warnings;
 
 # Find results for each of the following number of digits:
 my @digits = (2, 3, 6, 7);

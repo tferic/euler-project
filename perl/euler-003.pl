@@ -6,6 +6,7 @@ https://projecteuler.net/problem=3
 =cut
 
 use strict;
+use warnings;
 use bignum;
 
 # we want to obtain prime factorization for the following numbers:
