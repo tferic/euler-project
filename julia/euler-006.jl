@@ -15,7 +15,7 @@ maxnum_range = (10, 100, 1000000, BigInt(1000000000000000000000000000000))
 function sum_number_range(last::BigInt)
     #=
     This function creates the sum of all natural numbers between 1 and last
-        expects: number (first/last number of number range)
+        expects: number (last number of number range)
         returns: number (sum of all numbers)
     Implementation: https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF
     =#
@@ -26,7 +26,7 @@ end
 function sum_squared_number_range(last::BigInt)
     #=
     This function creates the sum of all squared natural numbers between 1 and last
-        expects: number (first/last number of number range)
+        expects: number (last number of number range)
         returns: number (sum of all squared numbers)
     Implementation: https://en.wikipedia.org/wiki/Square_number
     =#
