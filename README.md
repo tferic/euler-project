@@ -6,6 +6,7 @@ Trying to follow these principles:
 <ul type="disc">
     <li>Avoid using modules/libraries.</li>
     <li>Don't use other's people code.</li>
+    <li>Try to creaate code, that can scale, and process much bigger numbers in a reasonable amount of time.</li>
     <li>Try to write code, that is easy to read and understand.</li>
     <li>Add comment lines, in order to further clarify code context and algorithms.</li>
 </ul>
