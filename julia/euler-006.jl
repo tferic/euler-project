@@ -9,7 +9,7 @@ Find the difference between the sum of the squares of the first one hundred natu
 https://projecteuler.net/problem=6
 =#
 
-# List of upper limits (for number ranges) to find smallest multiple on
+# List of upper limits (for number ranges) to run the calculations on:
 maxnum_range = (10, 100, 1000000, BigInt(1000000000000000000000000000000))
 
 function sum_number_range(last::BigInt)
