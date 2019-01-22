@@ -10,7 +10,7 @@ https://projecteuler.net/problem=6
 =#
 
 # List of upper limits (for number ranges) to run the calculations on:
-maxnum_range = (10, 100, 1000000, BigInt(1000000000000000000000000000000))
+maxnum_range = (10, 100, 1000000, 1000000000000000000000000000000)
 
 function sum_number_range(last::BigInt)
     #=
