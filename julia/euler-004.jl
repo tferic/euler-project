@@ -72,11 +72,11 @@ function find_biggest_palindrome(dig)
     # nested iteration counting backwards. Is pal_test a palindrome?
     for f1 = max:-1:min
         for f2 = max:-1:min
-            
+
             pal_test = f1 * f2
             #println("Palindrom Loop: digits: ", dig, " ; min: ", min, " ; max: ", max, " ; f1: ", f1, " ; f2: ", f2, " ; product: ", pal_test)
-            
-            if is_palindromic(pal_test)
+
+            if is_palindromic_handmade(pal_test)
                 if pal_test > pal_max
                     pal_max = pal_test
                     f1_max = f1

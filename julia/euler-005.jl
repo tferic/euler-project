@@ -39,7 +39,7 @@ end
 
 function find_smallest_common_multiple(maxnum::BigInt)
     #=
-    This function the smallest common multiple on a list of numnbers from 2-maxnum
+    This function finds the smallest common multiple on a list of numbers from 2-maxnum
         expects: number (upper limit of number list: 2-maxnum)
         returns: number (smallest common multiple)
     =#
