@@ -37,7 +37,7 @@ function get_lastprime_by_n(n::Int)
 end
 
 function guess_maxprime_by_n(n::Int)
-    #= This function returns a best guess on how many primes there will be for n number of primes
+    #= This function returns a best guess on what the biggest prime number will be for n number of primes
        https://en.wikipedia.org/wiki/Prime_number_theorem#Approximations_for_the_nth_prime_number
     =#
     return Integer(round( (log(n) + log(log(n)) ) * n) + 1)
