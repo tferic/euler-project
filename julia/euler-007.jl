@@ -9,7 +9,7 @@ using Printf
 
 primecount = (6, 10001, 10000000)
 
-function get_primecount_by_n(n::Int)
+function get_lastprime_by_n(n::Int)
     #= This function returns the last prime number for n primes
        Implementation: Sieve of Eratosthenes
     =#
@@ -53,6 +53,6 @@ end
 
 # Actually invoking the stuff here (main)
 for n in primecount
-    @time lastprime = get_primecount_by_n(n)
+    @time lastprime = get_lastprime_by_n(n)
     print_results(n, lastprime)
 end
