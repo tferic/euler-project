@@ -7,7 +7,7 @@ https://projecteuler.net/problem=7
 
 using Printf
 
-primecount = (6, 25, 10001, 10000000)
+primecount = (6, 10001, 10000000)
 
 function get_primecount_by_n(n::Int)
     #= This function returns the last prime number for n primes
@@ -54,6 +54,6 @@ end
 
 # Actually invoking the stuff here (main)
 for n in primecount
-    @time lastprime = length(get_primecount_by_n(n))
+    @time lastprime = get_primecount_by_n(n)
     print_results(n, lastprime)
 end
