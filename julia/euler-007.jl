@@ -5,48 +5,55 @@ What is the 10 001st prime number?
 https://projecteuler.net/problem=7
 =#
 
-using Plots
-using Primes
 using Printf
 
-primecount = (6, 25, 10001, 1000000)
+primecount = (6, 25, 10001, 10000000)
 
-primecache = [2, 3, 5, 7, 11, 13, 17, 19, 23]
-#primecache = convert(Array{BigInt}, [2, 3, 5, 7, 11, 13, 17, 19, 23])
+function get_primecount_by_n(n::Int)
+    #= This function returns the last prime number for n primes
+       Implementation: Sieve of Eratosthenes
+    =#
+    last_prime = 0
+    max = guess_maxprime_by_n(n)
 
-function find_nth_prime(n)
-    while length(primecache) < n
-        push!(primecache, get_nextprime() )
-        #push!(primecache, BigInt(get_nextprime()) )
-    end
-    return primecache[n]
-end
+    # Create a boolean array from 1:max and initialize all as true (all are considered primes until we find they are not)
+    primesmask::Array{Bool} = trues(max)
+    primesmask[1] = false    # 1 is not a prime
 
-function get_nextprime()
-    lastprime = primecache[end]
-    nextprime = lastprime + 2
-    while true
-        if isprime(nextprime)
-            return nextprime
-        else
-            nextprime += 2
+    for testprime = 2:max
+        if primesmask[testprime]
+            # true means this is a prime
+            last_prime = testprime
+
+            # Set all multiples of this prime to false in the boolean array
+            multiple = 2
+            while testprime * multiple <= max
+                primesmask[testprime * multiple] = false
+                multiple += 1
+            end
         end
     end
+    return last_prime
 end
 
-function print_results(n)
+function guess_maxprime_by_n(n::Int)
     #=
-    This function calculates and prints the results in a formatted way
-       expects: number (integer)
+    This function returns a best guess on how many primes there will be for n number of primes
+       expects: number of primes (integer)
     =#
-    @time p = find_nth_prime(n)
-    @printf("%19dth prime is: %20d\n", n, p)
+    return Integer(round(( log(n) + log(log(n)) ) * n) + 1)
+end
+
+function print_results(n::Int, lastprime::Int)
+    #=
+    This function prints the results in a formatted way
+       expects: number of primes (integer), last prime number (integer)
+    =#
+    @printf("%19dth prime is: %20d\n", n, lastprime)
 end
 
 # Actually invoking the stuff here (main)
 for n in primecount
-    print_results(n)
+    @time lastprime = length(get_primecount_by_n(n))
+    print_results(n, lastprime)
 end
-
-#gr()
-#plot(primecache, xaxis=:log, yaxis=:log)
