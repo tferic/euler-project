@@ -26,7 +26,7 @@ function get_lastprime_by_n(n::Int)
     last_prime = 3
     count_prime = 2
     max_prime_guess = guess_maxprime_by_n(n)
-    square = Integer(round(sqrt(max_prime_guess)))
+    sq_root = Integer(round(sqrt(max_prime_guess)))
 
     # Create bit-Array from 1:max and initialize all as true (all are considered primes until we find they are not)
     primes_mask::Array{Bool} = trues(max_prime_guess)
@@ -46,9 +46,8 @@ function get_lastprime_by_n(n::Int)
 
     remove_multiples(2)
 
-    for testprime = 3:2:square
+    for testprime = 3:2:sq_root
         if primes_mask[testprime]
-            #println("Found prime: $testprime")
             # true means this is a prime
             last_prime = testprime
             count_prime += 1
