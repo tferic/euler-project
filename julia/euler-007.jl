@@ -22,7 +22,7 @@ function get_lastprime_by_n(n::Integer)
 
     if count_prime >= n
         # max_prime_guess was too big (most often)
-        # count primes until the nth prime
+        # return exactly the nth prime
         return primes[n]
     else
         # max_prime_guess was too small (should never happen)
