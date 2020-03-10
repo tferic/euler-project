@@ -43,7 +43,7 @@ function guess_maxprime_by_n(n::Integer)
 end
 
 function get_primelist_eratosthenes(upperlimit::Integer)
-    #= This function returns a list of primes from 1:n
+    #= This function returns a list of primes from 1:upperlimit
        Implementation: Sieve of Eratosthenes (using BitArray)
     =#
 
