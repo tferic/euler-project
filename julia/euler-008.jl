@@ -57,15 +57,12 @@ bignum = map(x -> parse(UInt8, x), bignum)
 
 println("Digits in big number: ", length(bignum))
 
-digits = ""
-digits_product = 0
-
 function get_digits(bignum, index, d)
     #= This function accepts:
-       - an array of characters (which should be digits)
+       - an array of characters (which should be digits of a big number)
        - the index (offset) in the digits array
        - the number of digits required
-       The function returns the required adjacent digits from the digits array
+       The function returns the required adjacent digits from the digits array at the index
     =#
     return bignum[index:(index+d-1)]
 end
@@ -114,8 +111,9 @@ function print_result(digits, dig_c, prod)
        - number (product)
     =#
 
-    # Convert array of int to array of strings
+    # Convert array of int to a number as string
     digits = join(string.(digits))
+
     println("Digits(", dig_c,"): ", digits, " ; Max. product: ", prod)
 end
 
