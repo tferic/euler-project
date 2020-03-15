@@ -53,7 +53,6 @@ function get_primelist_eratosthenes(upperlimit::Integer)
         return [2]
     end
 
-    last_prime = 3
     sq_root = Integer(round(sqrt(upperlimit)))
 
     # Create BitArray from 1:max and initialize all as true (all are considered primes until we find they are not)
