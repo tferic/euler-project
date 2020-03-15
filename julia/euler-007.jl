@@ -47,16 +47,13 @@ function get_primelist_eratosthenes(upperlimit::Integer)
        Implementation: Sieve of Eratosthenes (using BitArray)
     =#
 
-    if upperlimit < 1
+    if upperlimit < 2
         return
-    elseif upperlimit == 1
-        return 2
     elseif upperlimit == 2
-        return 3
+        return [2]
     end
 
     last_prime = 3
-    count_prime = 2
     sq_root = Integer(round(sqrt(upperlimit)))
 
     # Create BitArray from 1:max and initialize all as true (all are considered primes until we find they are not)
@@ -81,7 +78,6 @@ function get_primelist_eratosthenes(upperlimit::Integer)
         if primes_mask[testprime]
             # true means this is a prime
             last_prime = testprime
-            count_prime += 1
 
             # Set all multiples of this prime to false in the boolean array
             remove_multiples(testprime)
