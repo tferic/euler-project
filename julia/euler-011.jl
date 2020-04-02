@@ -52,7 +52,7 @@ mygrid = [
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48;
 ]
 
-function mygrid_check_directions(mygrid, d)
+function mygrid_scan(mygrid, d)
     #= This function expects:
         - array (number grid)
         - number of digits to calculate the product from
@@ -62,59 +62,85 @@ function mygrid_check_directions(mygrid, d)
         - array (the actual numbers found, that build the biggest products)
     =#
 
-    rows, cols = size(mygrid)
-    rows_max = rows - d + 1
-    cols_max = cols - d + 1
+    x_dim, y_dim = arrdim = size(mygrid)
+    maxprod = 0
+    arr_maxprod = []
 
-    for x in [1:rows_max], y in [1:cols_max]
-        pos = (x, y)
-        get_slice_90_deg(mygrid, x, y, d)
-        get_slice_135_deg(mygrid, x, y, d)
-        get_slice_180_deg(mygrid, x, y, d)
-        get_slice_225_deg(mygrid, x, y, d)
-
-end
-
-function get_slice_90_deg(mygrid, pos, d)
-    #= This function returns a slice from a number grid
-       from position "pos" and lenght of "d" digits.
-       The direction is 90 degree (horizontal)
-    =#
-    x, y = pos
-    return mygrid[x, y:y+d-1]
-end
-
-function get_slice_135_deg(mygrid, pos, d)
-    #= This function returns a slice from a number grid
-       from position "pos" and lenght of "d" digits.
-       The direction is 120 degree (from upper left to lower right)
-    =#
-    x, y = pos
-    slice[]
-    for i in 0:d-1
-        push!(slice, mygrid[x+i, y+i])
+    for x_pos in [1:x_dim], y_pos in [1:y_dim]
+        pos = (x_pos, y_pos)
+        get_slice_0_deg(mygrid, arrdim, pos, d)
+        get_slice_45_deg(mygrid, arrdim, pos, d)
+        get_slice_90_deg(mygrid, arrdim, pos, d)
+        get_slice_135_deg(mygrid, arrdim, pos, d)
     end
-    return slice
 end
 
-function get_slice_180_deg(mygrid, pos, d)
+function get_slice_0_deg(mygrid, arrdim, pos, d)
     #= This function returns a slice from a number grid
        from position "pos" and lenght of "d" digits.
-       The direction is 180 degree (vertical)
+       The direction is 0 degree (horizontal)
     =#
-    x, y = pos
-    return mygrid[x:x+d-1, y]
-end
-
-function get_slice_225_deg(mygrid, pos, d)
-    #= This function returns a slice from a number grid
-       from position "pos" and lenght of "d" digits.
-       The direction is 225 degree (from upper right to lower left)
-    =#
-    x, y = pos
-    slice[]
-    for i in 0:d-1
-        push!(slice, mygrid[x+i, y+i])
+    x_pos, y_pos = pos
+    _, y_dim = arrdim
+    y_max = y_pos + d - 1
+    if y_max > y_dim
+        return false
+    else
+        return mygrid[x_pos, y_pos:y_max]
     end
-    return slice
+end
+
+function get_slice_45_deg(mygrid, arrdim, pos, d)
+    #= This function returns a slice from a number grid
+       from position "pos" and lenght of "d" digits.
+       The direction is 45 degree (from upper right to lower left)
+    =#
+    x_pos, y_pos = pos
+    x_dim, y_dim = arrdim
+    x_max = x_pos + d - 1
+    y_max = y_pos + d - 1
+    slice[]
+    if x_max ≤ x_dim && y_max ≤ y_dim
+        for i in 0:d-1
+            push!(slice, mygrid[x_pos+i, y_pos+i])
+        end
+        return slice
+    else
+        return false
+    end
+end
+
+function get_slice_90_deg(mygrid, arrdim, pos, d)
+    #= This function returns a slice from a number grid
+       from position "pos" and lenght of "d" digits.
+       The direction is 90 degree (vertical)
+    =#
+    x_pos, y_pos = pos
+    x_dim, _ = arrdim
+    x_max = x_pos + d - 1
+    if x_max > x_dim
+        return false
+    else
+        return mygrid[x_pos:x_max, y_pos]
+    end
+end
+
+function get_slice_135_deg(mygrid, arrdim, pos, d)
+    #= This function returns a slice from a number grid
+       from position "pos" and lenght of "d" digits.
+       The direction is 135 degree (from upper left to lower right)
+    =#
+    x_pos, y_pos = pos
+    x_dim, y_dim = arrdim
+    x_min = x_pos - d + 1
+    y_min = y_pos - d + 1
+    slice[]
+    if x_min ≥ 1 && y_min ≥ 1
+        for i in 0:d-1
+            push!(slice, mygrid[x+i, y+i])
+        end
+        return slice
+    else
+        return false
+    end
 end
