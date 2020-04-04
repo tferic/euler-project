@@ -62,17 +62,37 @@ function mygrid_scan(mygrid, d)
         - array (the actual numbers found, that build the biggest products)
     =#
 
-    x_dim, y_dim = arrdim = size(mygrid)
+    v_dim, h_dim = arrdim = size(mygrid)
     maxprod = 0
     arr_maxprod = []
 
-    for x_pos in [1:x_dim], y_pos in [1:y_dim]
-        pos = (x_pos, y_pos)
-        get_slice_0_deg(mygrid, arrdim, pos, d)
-        get_slice_45_deg(mygrid, arrdim, pos, d)
-        get_slice_90_deg(mygrid, arrdim, pos, d)
-        get_slice_135_deg(mygrid, arrdim, pos, d)
+    for h_pos = 1:h_dim, v_pos = 1:v_dim
+        pos = (v_pos, h_pos)
+        currentprod, numbers = get_highest_product(mygrid, arrdim, pos, d)
+        if currentprod > maxprod
+            maxprod = currentprod
+            arr_maxprod = numbers
+        end
     end
+    return maxprod, arr_maxprod
+end
+
+function get_highest_product(mygrid, arrdim, pos, d)
+    #= Wrapper function that checks for all possible products on this position
+       Directions are matching mathematical polar pattern.
+    =#
+    n1 = get_slice_0_deg(mygrid, arrdim, pos, d)
+    n2 = get_slice_225_deg(mygrid, arrdim, pos, d)
+    n3 = get_slice_270_deg(mygrid, arrdim, pos, d)
+    n4 = get_slice_315_deg(mygrid, arrdim, pos, d)
+    products = Dict( prod(n1) => n1,
+        prod(n2) => n2,
+        prod(n3) => n3,
+        prod(n4) => n4)
+
+    maxprod = maximum(keys(products))
+    maxnum = products[maxprod]
+    return maxprod, maxnum
 end
 
 function get_slice_0_deg(mygrid, arrdim, pos, d)
@@ -80,67 +100,81 @@ function get_slice_0_deg(mygrid, arrdim, pos, d)
        from position "pos" and lenght of "d" digits.
        The direction is 0 degree (horizontal)
     =#
-    x_pos, y_pos = pos
-    _, y_dim = arrdim
-    y_max = y_pos + d - 1
-    if y_max > y_dim
-        return false
+    v_pos, h_pos = pos
+    _, h_dim = arrdim
+
+    h_max = h_pos + d - 1
+
+    if h_max ≤ h_dim
+        return view(mygrid, v_pos, h_pos:h_max)
     else
-        return mygrid[x_pos, y_pos:y_max]
+        return 1
     end
 end
 
-function get_slice_45_deg(mygrid, arrdim, pos, d)
+function get_slice_225_deg(mygrid, arrdim, pos, d)
     #= This function returns a slice from a number grid
        from position "pos" and lenght of "d" digits.
-       The direction is 45 degree (from upper right to lower left)
+       The direction is 225 degree (from upper right to lower left)
     =#
-    x_pos, y_pos = pos
-    x_dim, y_dim = arrdim
-    x_max = x_pos + d - 1
-    y_max = y_pos + d - 1
-    slice[]
-    if x_max ≤ x_dim && y_max ≤ y_dim
+    v_pos, h_pos = pos
+    v_dim, h_dim = arrdim
+
+    v_max = v_pos + d - 1
+    h_min = h_pos - d + 1
+
+    slice = []
+
+    if h_min ≥ 1 && v_max ≤ v_dim
         for i in 0:d-1
-            push!(slice, mygrid[x_pos+i, y_pos+i])
+            push!(slice, mygrid[v_pos + i, h_pos - i])
         end
         return slice
     else
-        return false
+        return 1
     end
 end
 
-function get_slice_90_deg(mygrid, arrdim, pos, d)
+function get_slice_270_deg(mygrid, arrdim, pos, d)
     #= This function returns a slice from a number grid
        from position "pos" and lenght of "d" digits.
-       The direction is 90 degree (vertical)
+       The direction is 270 degree (vertical)
     =#
-    x_pos, y_pos = pos
-    x_dim, _ = arrdim
-    x_max = x_pos + d - 1
-    if x_max > x_dim
-        return false
+    v_pos, h_pos = pos
+    v_dim, _ = arrdim
+
+    v_max = v_pos + d - 1
+
+    if v_max ≤ v_dim
+        return view(mygrid, v_pos:v_max, h_pos)
     else
-        return mygrid[x_pos:x_max, y_pos]
+        return 1
     end
 end
 
-function get_slice_135_deg(mygrid, arrdim, pos, d)
+function get_slice_315_deg(mygrid, arrdim, pos, d)
     #= This function returns a slice from a number grid
        from position "pos" and lenght of "d" digits.
-       The direction is 135 degree (from upper left to lower right)
+       The direction is 315 degree (from upper left to lower right)
     =#
-    x_pos, y_pos = pos
-    x_dim, y_dim = arrdim
-    x_min = x_pos - d + 1
-    y_min = y_pos - d + 1
-    slice[]
-    if x_min ≥ 1 && y_min ≥ 1
+    v_pos, h_pos = pos
+    v_dim, h_dim = arrdim
+
+    v_max = v_pos + d - 1
+    h_max = h_pos + d - 1
+
+    slice = []
+
+    if v_max ≤ v_dim && h_max ≤ h_dim
         for i in 0:d-1
-            push!(slice, mygrid[x+i, y+i])
+            push!(slice, mygrid[v_pos + i, h_pos + i])
         end
         return slice
     else
-        return false
+        return 1
     end
 end
+
+maxprod, numbers = mygrid_scan(mygrid, product_by_digits)
+
+println("Found biggest product $maxprod in numbers $numbers.")
