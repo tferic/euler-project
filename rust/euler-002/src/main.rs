@@ -13,14 +13,14 @@ fn main() {
     let fib_limit: u64 = 4000000;
 
     // Initialize start numbers of fibonacci sequence
-    let fib_init: [u64; 2] = [1, 2];
+    let fib_init: [u8; 2] = [1, 2];
 
     println!("Sum(90):        {}", sum_even_fibonacci_numbers(fib_init, 90));
     println!("Sum(4'000'000): {}", sum_even_fibonacci_numbers(fib_init, fib_limit));
 }
 
-fn sum_even_fibonacci_numbers(fib_init: [u64; 2], fib_limit: u64) -> u64 {
-    let (mut fib1, mut fib2) = (fib_init[0], fib_init[1]);
+fn sum_even_fibonacci_numbers(fib_init: [u8; 2], fib_limit: u64) -> u64 {
+    let (mut fib1, mut fib2) = (fib_init[0] as u64, fib_init[1] as u64);
     let mut sum = 0;
     while fib2 <= fib_limit {
         if fib2 % 2 == 0 {
