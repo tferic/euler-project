@@ -24,7 +24,7 @@ sub prime_factorization {
     my $remaining = $num;
     my @results;
 
-    # Exception case for prime factor 2 (after this, we can skip all even numbers)
+    # Special case when prime factor = 2 (Reduce number space 50%)
     while ( $remaining % 2 == 0 ) {
         push @results, 2;
         $remaining /= 2;
