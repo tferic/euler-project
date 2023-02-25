@@ -26,7 +26,7 @@ function prime_factorization(num)
     # Exception case for prime factor 2 (after this, we can skip all even numbers)
     while remaining % 2 == 0
         push!(results, 2)
-        remaining /= BigInt(2)
+        remaining ÷= 2
     end
 
     # primetest is the number, by which we are testing division (potential prime factor)
@@ -40,7 +40,7 @@ function prime_factorization(num)
             # Division fits - it must be a prime factor
             push!(results, primetest)
             # New number (to be prime factorized) := old number divided by prime factor
-            remaining /= BigInt(primetest)
+            remaining ÷= primetest
         else
             # Division did not fit (not a prime factor), try next number
             primetest += 2
@@ -49,7 +49,7 @@ function prime_factorization(num)
 
     if remaining != 1
         # Every remaining number (except 1) must be a prime factor (the last one)
-        push!(results, BigInt(remaining))
+        push!(results, remaining)
     end
     return results
 end
