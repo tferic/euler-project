@@ -7,12 +7,15 @@ https://projecteuler.net/problem=3
 
 //extern crate num_bigint_dig as num_bigint;
 //use num_bigint::BigUint;
+use std::time::{Instant};
 
 fn main() {
     let numbers: Vec::<u64> = vec![13195, 600851475143, 12345678901234, 1234567890123456789];
 
     for i in numbers {
-        print_results(i);
+        let start = Instant::now();
+        print_results(i as u64);
+        println!("Runtime: {:?}\n", start.elapsed());
     }
 }
 
@@ -23,8 +26,8 @@ fn print_results(num: u64) {
     */
     let results: Vec::<u64> = prime_factorization(num);
 
-    println!("Highest prime factor for {}: {:?}\n", num, results.iter().max() );
-    println!("List of prime factors for {}: {:?}\n", num, results );
+    println!("Highest prime factor  for {}: {:?}", num, results.iter().max() );
+    println!("List of prime factors for {}: {:?}", num, results );
 }
 
 fn prime_factorization(num: u64) -> Vec::<u64> {
@@ -43,31 +46,38 @@ fn prime_factorization(num: u64) -> Vec::<u64> {
 
     // Special case when prime factor = 2 (Reduce number space 50%)
     while factorize_me % 2 == 0 {
-        results.push(2 as u64);
-        factorize_me /= 2 as u64;
+        results.push(2);
+        factorize_me /= 2;
     }
 
     // primefactor_test is the number, by which we are testing division (potential prime factor)
     // From 3, increment by 2 (test only for odd numbers, skip even numbers)
-    let mut primefactor_test: u64 = 3 as u64;
+    let mut primefactor_test: u64 = 3;
 
+    let mut primefactor_test_sq: u64 = primefactor_test ^ 2;
+    let mut start_inside = Instant::now();
     // Check our number, to be prime factorized (becoming smaller by each found prime factor),
     //   against each potential number, that could be a prime factor (becoming bigger)
-    while primefactor_test ^ 2 as u64 <= factorize_me {
-        if factorize_me % primefactor_test == 0 as u64 {
+    while primefactor_test_sq <= factorize_me {
+        if factorize_me % primefactor_test == 0 {
+            println!("DEBUG: Found new prime factor: {} ; for number: {} ; performance: {:?}", primefactor_test, factorize_me, start_inside.elapsed());
             // Division fits - it must be a prime factor
-            results.push(primefactor_test);
+            results.push(primefactor_test as u64);
             
             // New number (to be prime factorized) := old number divided by prime factor
             factorize_me /= primefactor_test;
+
+            // Cache primefactor_test ^ 2 for performance reasons
+            primefactor_test_sq = primefactor_test ^ 2;
+            start_inside = Instant::now();
         }
         else {
             // Division did not fit (not a prime factor), try next number
-            primefactor_test += 2 as u64;
+            primefactor_test += 2;
         }
     }
 
-    if factorize_me != 1 as u64 {
+    if factorize_me != 1 {
         // Every remaining number (except 1) must be a prime factor (the last one)
         results.push(factorize_me);
     }
