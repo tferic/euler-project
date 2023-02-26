@@ -7,8 +7,12 @@ https://projecteuler.net/problem=3
 
 using Printf
 
-# we want to obtain prime factorization for the following numbers:
-numbers = (13195, 600851475143, 12345678901234, 1234567890123456789)
+function main()
+    # we want to obtain prime factorization for the following numbers:
+    numbers = (13195, 600851475143, 12345678901234, 1234567890123456789)
+    # Actually invoking the stuff here (main)
+    @time map(print_results, numbers)
+end
 
 function prime_factorization(num)
     #=
@@ -63,7 +67,7 @@ function print_results(num)
 
     @printf("Highest prime factor for %20d: %20d\n", num, maximum(results) )
     @printf("List of prime factors for %19d: %20s\n", num, results )
+    println()
 end
 
-# Actually invoking the stuff here (main)
-map(print_results, numbers)
+main()
